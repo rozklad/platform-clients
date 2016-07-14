@@ -67,7 +67,7 @@ return [
 	|
 	*/
 
-	'version' => '0.1.2',
+	'version' => '0.1.3',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -169,6 +169,8 @@ return [
 		], function()
 		{
 			Route::get('/', ['as' => 'sanatorium.clients.clients.index', 'uses' => 'ClientsController@index']);
+			Route::get('/create', ['as' => 'sanatorium.clients.clients.new', 'uses' => 'ClientsController@create']);
+			Route::post('/create', ['as' => 'sanatorium.clients.clients.new', 'uses' => 'ClientsController@store']);
 		});
 	},
 
