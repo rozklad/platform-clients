@@ -16,8 +16,8 @@ class CreateClientsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('tax_id')->nullable();
-			$table->integer('vat_id')->nullable();
+			$table->string('tax_id')->nullable();
+			$table->string('vat_id')->nullable();
 			$table->tinyInteger('supplier')->default(0);
 			$table->timestamps();
 		});

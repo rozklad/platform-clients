@@ -36,15 +36,18 @@ class ClientDataTableSeeder extends Seeder {
 
         foreach( $old_data as $client ) {
 
-            $clientsRepo->firstOrCreate([
+            $object = $clientsRepo->firstOrCreate([
                 'id' => $client[0],
                 'name' => $client[1],
-                'address' => implode("\n", [$client[2], $client[3], $client[4]]),
                 'tax_id' => $client[5],
                 'vat_id' => $client[6],
                 'created_at' => $client[7],
-                'updated_at' => $client[8]
+                'updated_at' => $client[8],
             ]);
+
+            $object = \Sanatorium\Clients\Models\Client::find($object->id);
+            $object->client_address = implode("\n", [$client[2], $client[3], $client[4]]);
+            $object->save();
 
         }
 
