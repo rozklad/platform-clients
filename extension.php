@@ -67,7 +67,7 @@ return [
 	|
 	*/
 
-	'version' => '0.1.3',
+	'version' => '0.1.4',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -194,6 +194,8 @@ return [
 	*/
 
 	'seeds' => [
+
+		'Sanatorium\Clients\Database\Seeds\ClientDataTableSeeder',
 
 	],
 

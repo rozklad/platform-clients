@@ -190,8 +190,21 @@ class ClientsController extends AdminController {
 			$client = $this->clients->createModel();
 		}
 
+		$clientmodes = [
+		    [
+		        'name' => trans('sanatorium/clients::clients/model.general.supplier_values.buyer'),
+                'description' => trans('sanatorium/clients::clients/model.general.supplier_values.buyer_help'),
+                'value' => 0,
+            ],
+            [
+                'name' => trans('sanatorium/clients::clients/model.general.supplier_values.supplier'),
+                'description' => trans('sanatorium/clients::clients/model.general.supplier_values.supplier_help'),
+                'value' => 1
+            ]
+        ];
+
 		// Show the page
-		return view('sanatorium/clients::clients.form', compact('mode', 'client'));
+		return view('sanatorium/clients::clients.form', compact('mode', 'client', 'clientmodes'));
 	}
 
 	/**

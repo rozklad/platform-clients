@@ -8,10 +8,50 @@
 
 {{-- Queue assets --}}
 {{ Asset::queue('validate', 'platform/js/validate.js', 'jquery') }}
+{{ Asset::queue('selectize', 'selectize/js/selectize.js', 'jquery') }}
+{{ Asset::queue('selectize', 'selectize/css/selectize.bootstrap3.css') }}
 
 {{-- Inline scripts --}}
 @section('scripts')
-@parent
+	@parent
+	<script type="text/javascript">
+		$(function(){
+			$('#supplier').selectize({
+				persist: false,
+				maxItems: 1,
+				create: false,
+				allowEmptyOption: false,
+				valueField: 'value',
+				labelField: 'name',
+				searchField: ['name'],
+				sortField: [
+					{field: 'name', direction: 'asc'}
+				],
+				items: [
+					'{{ $client->supplier ? $client->supplier : '0' }}'
+				],
+				options: [
+					@foreach( $clientmodes as $clientmode )
+						{ name: '{{ $clientmode['name'] }}', value: '{{ $clientmode['value'] }}', description: '{{ $clientmode['description'] }}' },
+					@endforeach
+				],
+				render: {
+					item: function(item, escape) {
+						return '<div>' +
+								(item.name ? '<strong class="name">' + item.name + '</strong><br>' : '') +
+								(item.description ? '<span class="description">' + item.description + '</span>' : '') +
+								'</div>';
+					},
+					option: function(item, escape) {
+						return '<div>' +
+								(item.name ? '<strong class="name">' + item.name + '</strong><br>' : '') +
+								(item.description ? '<span class="description">' + item.description + '</span>' : '') +
+								'</div>';
+					}
+				}
+			});
+		});
+	</script>
 @stop
 
 {{-- Inline styles --}}
@@ -87,7 +127,6 @@
 				{{-- Form: Tabs --}}
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active" role="presentation"><a href="#general-tab" aria-controls="general-tab" role="tab" data-toggle="tab">{{{ trans('sanatorium/clients::clients/common.tabs.general') }}}</a></li>
-					<li role="presentation"><a href="#attributes" aria-controls="attributes" role="tab" data-toggle="tab">{{{ trans('sanatorium/clients::clients/common.tabs.attributes') }}}</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -99,68 +138,72 @@
 
 							<div class="row">
 
-								<div class="form-group{{ Alert::onForm('name', ' has-error') }}">
+								<div class="col-sm-6">
 
-									<label for="name" class="control-label">
-										<i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('sanatorium/clients::clients/model.general.name_help') }}}"></i>
-										{{{ trans('sanatorium/clients::clients/model.general.name') }}}
-									</label>
+									<div class="form-group{{ Alert::onForm('name', ' has-error') }}">
 
-									<input type="text" class="form-control" name="name" id="name" placeholder="{{{ trans('sanatorium/clients::clients/model.general.name') }}}" value="{{{ input()->old('name', $client->name) }}}">
+										<label for="name" class="control-label">
+											<i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('sanatorium/clients::clients/model.general.name_help') }}}"></i>
+											{{{ trans('sanatorium/clients::clients/model.general.name') }}}
+										</label>
 
-									<span class="help-block">{{{ Alert::onForm('name') }}}</span>
+										<input type="text" class="form-control" name="name" id="name" placeholder="{{{ trans('sanatorium/clients::clients/model.general.name') }}}" value="{{{ input()->old('name', $client->name) }}}">
 
-								</div>
+										<span class="help-block">{{{ Alert::onForm('name') }}}</span>
 
-								<div class="form-group{{ Alert::onForm('tax_id', ' has-error') }}">
+									</div>
 
-									<label for="tax_id" class="control-label">
-										<i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('sanatorium/clients::clients/model.general.tax_id_help') }}}"></i>
-										{{{ trans('sanatorium/clients::clients/model.general.tax_id') }}}
-									</label>
+									<div class="form-group{{ Alert::onForm('tax_id', ' has-error') }}">
 
-									<input type="text" class="form-control" name="tax_id" id="tax_id" placeholder="{{{ trans('sanatorium/clients::clients/model.general.tax_id') }}}" value="{{{ input()->old('tax_id', $client->tax_id) }}}">
+										<label for="tax_id" class="control-label">
+											<i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('sanatorium/clients::clients/model.general.tax_id_help') }}}"></i>
+											{{{ trans('sanatorium/clients::clients/model.general.tax_id') }}}
+										</label>
 
-									<span class="help-block">{{{ Alert::onForm('tax_id') }}}</span>
+										<input type="text" class="form-control" name="tax_id" id="tax_id" placeholder="{{{ trans('sanatorium/clients::clients/model.general.tax_id') }}}" value="{{{ input()->old('tax_id', $client->tax_id) }}}">
 
-								</div>
+										<span class="help-block">{{{ Alert::onForm('tax_id') }}}</span>
 
-								<div class="form-group{{ Alert::onForm('vat_id', ' has-error') }}">
+									</div>
 
-									<label for="vat_id" class="control-label">
-										<i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('sanatorium/clients::clients/model.general.vat_id_help') }}}"></i>
-										{{{ trans('sanatorium/clients::clients/model.general.vat_id') }}}
-									</label>
+									<div class="form-group{{ Alert::onForm('vat_id', ' has-error') }}">
 
-									<input type="text" class="form-control" name="vat_id" id="vat_id" placeholder="{{{ trans('sanatorium/clients::clients/model.general.vat_id') }}}" value="{{{ input()->old('vat_id', $client->vat_id) }}}">
+										<label for="vat_id" class="control-label">
+											<i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('sanatorium/clients::clients/model.general.vat_id_help') }}}"></i>
+											{{{ trans('sanatorium/clients::clients/model.general.vat_id') }}}
+										</label>
 
-									<span class="help-block">{{{ Alert::onForm('vat_id') }}}</span>
+										<input type="text" class="form-control" name="vat_id" id="vat_id" placeholder="{{{ trans('sanatorium/clients::clients/model.general.vat_id') }}}" value="{{{ input()->old('vat_id', $client->vat_id) }}}">
 
-								</div>
+										<span class="help-block">{{{ Alert::onForm('vat_id') }}}</span>
 
-								<div class="form-group{{ Alert::onForm('supplier', ' has-error') }}">
-
-									<label for="name" class="control-label">
-										<i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('sanatorium/clients::clients/model.general.supplier_help') }}}"></i>
-										{{{ trans('sanatorium/clients::clients/model.general.supplier') }}}
-									</label>
-
-									<input type="text" class="form-control" name="supplier" id="supplier" placeholder="{{{ trans('sanatorium/clients::clients/model.general.supplier') }}}" value="{{{ input()->old('supplier', $client->supplier) }}}">
-
-									<span class="help-block">{{{ Alert::onForm('supplier') }}}</span>
+									</div>
 
 								</div>
 
+								<div class="col-sm-6">
+
+									<div class="form-group{{ Alert::onForm('supplier', ' has-error') }}">
+
+										<label for="name" class="control-label">
+											<i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('sanatorium/clients::clients/model.general.supplier_help') }}}"></i>
+											{{{ trans('sanatorium/clients::clients/model.general.supplier') }}}
+										</label>
+
+										<select class="form-control" name="supplier" id="supplier"></select>
+
+										<span class="help-block">{{{ Alert::onForm('supplier') }}}</span>
+
+									</div>
+
+								</div>
 
 							</div>
 
 						</fieldset>
 
-					</div>
-
-					{{-- Tab: Attributes --}}
-					<div role="tabpanel" class="tab-pane fade" id="attributes">
 						@attributes($client)
+
 					</div>
 
 				</div>
