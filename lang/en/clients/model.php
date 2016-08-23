@@ -19,7 +19,8 @@ return [
             'buyer_help' => 'Client will be available in operations only as buyer',
             'supplier' => 'Supplier',
             'supplier_help' => 'Client will be available in operations only as supplier'
-        ]
+        ],
+        'client_address' => 'Client address',
 
 	],
 
