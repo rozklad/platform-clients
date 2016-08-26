@@ -27,8 +27,8 @@ class AddClientAttributes extends Migration {
         [
             'name' => 'Swift',
             'type' => 'input',
-            'description' => 'swift',
-            'slug' => 'Suppliers swift',
+            'description' => 'Suppliers swift',
+            'slug' => 'swift',
         ]
     ];
 
