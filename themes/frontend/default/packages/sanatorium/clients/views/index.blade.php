@@ -14,11 +14,7 @@
 
 			<th>VAT ID</th>
 
-			<th>Address line 1</th>
-
-			<th>Address line 2</th>
-
-			<th>Address line 3</th>
+			<th>Client address</th>
 
 		</thead>
 
@@ -48,21 +44,10 @@
 
 				<td>
 
-					{{ $client->client_address_line_1 }}
+					{{ $client->client_address }}
 
 				</td>
 
-				<td>
-
-					{{ $client->client_address_line_2 }}
-
-				</td>
-
-				<td>
-
-					{{ $client->client_address_line_3 }}
-
-				</td>
 
 			</tr>
 

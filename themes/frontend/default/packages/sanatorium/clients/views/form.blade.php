@@ -39,19 +39,7 @@
 
 		<div class="form-group">
 			
-			<input class="form-control" type="text" name="client_address_line_1" placeholder="Address line 1">
-
-		</div>
-
-		<div class="form-group">
-			
-			<input class="form-control" type="text" name="client_address_line_2" placeholder="Address line 2">
-
-		</div>
-
-		<div class="form-group">
-			
-			<input class="form-control" type="text" name="client_address_line_3" placeholder="Address line 3">
+			<input class="form-control" type="text" name="client_address" placeholder="Client address">
 
 		</div>
 

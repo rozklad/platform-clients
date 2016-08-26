@@ -11,6 +11,24 @@ class AddClientAttributes extends Migration {
             'type' => 'textarea',
             'description' => 'Client address that will be shown on bill',
             'slug' => 'client_address',
+        ],
+        [
+            'name' => 'Account number',
+            'type' => 'input',
+            'description' => 'Account number of supplier',
+            'slug' => 'account_number',
+        ],
+        [
+            'name' => 'Supplier iban',
+            'type' => 'input',
+            'description' => 'Suppliers iban',
+            'slug' => 'iban',
+        ],
+        [
+            'name' => 'Swift',
+            'type' => 'input',
+            'description' => 'swift',
+            'slug' => 'Suppliers swift',
         ]
     ];
 
